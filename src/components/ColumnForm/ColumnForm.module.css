@@ -1,0 +1,14 @@
+.title {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 0 18px 0;
+}
+
+.icon::before {
+  padding-right: 12px;
+  color: #e1644e;
+  font-size: 24px;
+  vertical-align: middle;
+  position: relative;
+  top: -4px;
+}/*# sourceMappingURL=ColumnForm.module.css.map */

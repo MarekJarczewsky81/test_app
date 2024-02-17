@@ -14,8 +14,13 @@ const List = () => {
   ]);
 
   const addColumn = newColumn => {
-    setColumns([...columns, { id: shortid(), title: newColumn.title }]);
+    setColumns([
+      ...columns,
+      { id: shortid(), title: newColumn.title, icon: newColumn.icon },
+    ]);
   };
+
+  
   
 return (
   <div className={styles.list}>
@@ -32,7 +37,7 @@ return (
         <Column key={column.id} title={column.title} icon={column.icon} />
       ))}
       {/* <form onSubmit={handleSubmit}> */}
-      <ColumnForm action={addColumn} />
+        <ColumnForm action={addColumn} />
       {/* </form> */}
       {/* <Column title="Books" icon="book" />
         <Column title="Movies" icon="film"/>

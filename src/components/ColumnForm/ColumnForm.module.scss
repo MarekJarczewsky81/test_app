@@ -1,0 +1,17 @@
+@use "sass:math";
+@import '../../styles/settings.scss';
+
+.title {
+  text-align: center;
+  font-size: ($base-size * 1.5);
+  margin: 0 0 ($base-size * 1.5) 0;
+}
+
+.icon::before {
+  padding-right: $base-size;
+  color: $color-warning;
+  font-size: ($base-size * 2);
+  vertical-align: middle;
+  position: relative;
+  top: - math.div($base-size, 3);
+}
