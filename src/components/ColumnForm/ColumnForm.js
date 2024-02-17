@@ -14,20 +14,22 @@ const ColumnForm = props => {
     };
 
     return (
-      <form onSubmit={handleSubmit}>
-        Title:{" "}
+      <form onSubmit={handleSubmit} className={styles.columnForm}>
+        <span className={styles.name}>Title:</span>
         <input
+          className={styles.input}
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        Icon:{" "}
+        <span className={styles.name}>Icon:</span>
         <input
+          className={styles.input}
           type="text"
           value={icon}
           onChange={(e) => setIcon(e.target.value)}
         />
-        <Button>Add column</Button>
+        <Button className={styles.button}>Add column</Button>
       </form>
     );
 };
