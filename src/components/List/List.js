@@ -1,23 +1,21 @@
 import styles from "./List.module.scss";
 import Column from "../Column/Column.js";
-import { useState } from "react";
+import ColumnForm from "../ColumnForm/ColumnForm.js";
 import shortid from "shortid";
+import { useState } from "react";
 
 
 const List = () => {
 
   const [columns, setColumns] = useState([
     { id: 1, title: "Books", icon: "book" },
-    { id: 2, title: "Movies", icon: "film"},
-    { id: 3, title: "Games", icon: "gamepad" }
-    ]);
+    { id: 2, title: "Movies", icon: "film" },
+    { id: 3, title: "Games", icon: "gamepad" },
+  ]);
 
-  const handleSubmit = e => {
-	e.preventDefault();
-	setColumns([...columns, { id: shortid(), title: value }]);
-};
-
-  const [value, setValue] = useState('');
+  const addColumn = newColumn => {
+    setColumns([...columns, { id: shortid(), title: newColumn.title }]);
+  };
   
 return (
   <div className={styles.list}>
@@ -33,10 +31,9 @@ return (
       {columns.map((column) => (
         <Column key={column.id} title={column.title} icon={column.icon} />
       ))}
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={e => setValue(e.target.value)} />
-        <button>Add column</button>
-      </form>
+      {/* <form onSubmit={handleSubmit}> */}
+      <ColumnForm action={addColumn} />
+      {/* </form> */}
       {/* <Column title="Books" icon="book" />
         <Column title="Movies" icon="film"/>
         <Column title="Games" icon="gamepad" /> */}
