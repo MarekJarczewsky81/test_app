@@ -8,15 +8,39 @@ import { useState } from "react";
 const List = () => {
 
   const [columns, setColumns] = useState([
-    { id: 1, title: "Books", icon: "book" },
-    { id: 2, title: "Movies", icon: "film" },
-    { id: 3, title: "Games", icon: "gamepad" },
+    { 
+      id: 1, 
+      title: "Books", 
+      icon: "book",
+      cards: [
+        { id: 1, title: 'This is going to Hurt'},
+        { id: 2, title: 'The Hobbit'},
+      ]  
+    },
+    { 
+      id: 2, 
+      title: "Movies", 
+      icon: "film",
+      cards: [
+        { id: 1, title: 'Harry Potter'},
+        { id: 2, title: 'The Lord of the Rings'},
+      ]
+    },
+    { 
+      id: 3, 
+      title: "Games", 
+      icon: "gamepad",
+      cards: [
+        { id: 1, title: 'World of Warcraft'},
+        { id: 2, title: 'The Witcher'},
+      ] 
+    },
   ]);
 
   const addColumn = newColumn => {
     setColumns([
       ...columns,
-      { id: shortid(), title: newColumn.title, icon: newColumn.icon },
+      { id: shortid(), title: newColumn.title, icon: newColumn.icon, cards: [] },
     ]);
   };
 
@@ -34,10 +58,17 @@ return (
     </p>
     <section className={styles.columns}>
       {columns.map((column) => (
-        <Column key={column.id} title={column.title} icon={column.icon} />
+        <Column
+          key={column.id}
+          id={column.id}
+          title={column.title}
+          icon={column.icon}
+          cards={column.cards}
+        />
       ))}
+      
       {/* <form onSubmit={handleSubmit}> */}
-        <ColumnForm action={addColumn} />
+      <ColumnForm action={addColumn} />
       {/* </form> */}
       {/* <Column title="Books" icon="book" />
         <Column title="Movies" icon="film"/>
