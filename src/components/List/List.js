@@ -36,6 +36,7 @@ const List = () => {
       ] 
     },
   ]);
+   
 
   const addColumn = newColumn => {
     setColumns([
@@ -80,12 +81,8 @@ return (
         />
       ))}
       
-      {/* <form onSubmit={handleSubmit}> */}
       <ColumnForm action={addColumn} />
-      {/* </form> */}
-      {/* <Column title="Books" icon="book" />
-        <Column title="Movies" icon="film"/>
-        <Column title="Games" icon="gamepad" /> */}
+      
     </section>
   </div>
 );
@@ -94,12 +91,3 @@ return (
 export default List;
 
 
-// elem.eventListener('change',function(e) {
-//   setValue(e.target.value)}); 
-// === 
-// onChange={e => setValue(e.target.value)}
-
-
-// e => setValue(e.target.value)
-// ===
-// e => { return setValue(e.target.value) }
