@@ -1,23 +1,62 @@
 import styles from "./List.module.scss";
 import Column from "../Column/Column.js";
-import { useState } from "react";
+import ColumnForm from "../ColumnForm/ColumnForm.js";
 import shortid from "shortid";
+import { useState } from "react";
 
 
 const List = () => {
 
   const [columns, setColumns] = useState([
-    { id: 1, title: "Books", icon: "book" },
-    { id: 2, title: "Movies", icon: "film"},
-    { id: 3, title: "Games", icon: "gamepad" }
+    { 
+      id: 1, 
+      title: "Books", 
+      icon: "book",
+      cards: [
+        { id: 1, title: 'This is going to Hurt'},
+        { id: 2, title: 'The Hobbit'},
+      ]  
+    },
+    { 
+      id: 2, 
+      title: "Movies", 
+      icon: "film",
+      cards: [
+        { id: 1, title: 'Harry Potter'},
+        { id: 2, title: 'The Lord of the Rings'},
+      ]
+    },
+    { 
+      id: 3, 
+      title: "Games", 
+      icon: "gamepad",
+      cards: [
+        { id: 1, title: 'World of Warcraft'},
+        { id: 2, title: 'The Witcher'},
+      ] 
+    },
+  ]);
+
+  const addColumn = newColumn => {
+    setColumns([
+      ...columns,
+      { id: shortid(), title: newColumn.title, icon: newColumn.icon, cards: [] },
     ]);
+  };
 
-  const handleSubmit = e => {
-	e.preventDefault();
-	setColumns([...columns, { id: shortid(), title: value }]);
-};
+  const addCard = (newCard, columnId) => {
+    const columnsUpdated = columns.map(column => {
+      if(column.id === columnId)
+        return {
+          ...column,
+          cards: [...column.cards, { id: shortid(), title: newCard.title }],
+        };
+      else 
+        return column;
+    });
 
-  const [value, setValue] = useState('');
+    setColumns(columnsUpdated);
+  }
   
 return (
   <div className={styles.list}>
@@ -30,13 +69,20 @@ return (
       Interesting things I want to check out!
     </p>
     <section className={styles.columns}>
-      {columns.map((column) => (
-        <Column key={column.id} title={column.title} icon={column.icon} />
+      {columns.map(column => (
+        <Column
+          key={column.id}
+          id={column.id}
+          title={column.title}
+          icon={column.icon}
+          cards={column.cards}
+          action={addCard}
+        />
       ))}
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={e => setValue(e.target.value)} />
-        <button>Add column</button>
-      </form>
+      
+      {/* <form onSubmit={handleSubmit}> */}
+      <ColumnForm action={addColumn} />
+      {/* </form> */}
       {/* <Column title="Books" icon="book" />
         <Column title="Movies" icon="film"/>
         <Column title="Games" icon="gamepad" /> */}
